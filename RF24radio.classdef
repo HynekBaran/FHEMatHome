@@ -1,0 +1,29 @@
+params header_from device_index
+
+state temp
+
+reading temp match "^(MSG TMP .*'data.device_index'='%device_index'.*'header.from'='%header_from'.*)$"
+reading temp postproc { s/^.*('temp'=')([\+,\-]?\d+\.?\d*)(').*$/$2/;; $_ }
+
+reading humidity match "^(MSG TMP .*'data.device_index'='%device_index'.*'header.from'='%header_from'.*('humidity'=').*)$"
+reading humidity postproc { s/^.*('humidity'=')([\+,\-]?\d+\.?\d*)(').*$/$2/;; $_ }
+
+reading time match "^(MSG TMP .*'data.device_index'='%device_index'.*'header.from'='%header_from'.*)$"
+reading time postproc { s/^.*('data.time'=')([\+,\-]?\d+\.?\d*)(').*$/$2/;; $_ }
+
+reading device_index match "^(MSG TMP .*'data.device_index'='%device_index'.*'header.from'='%header_from'.*)$"
+reading device_index postproc { s/^.*('data.device_index'=')([\+,\-]?\d+\.?\d*)(').*$/$2/;; $_ }
+
+reading from match "^(MSG TMP .*'data.device_index'='%device_index'.*'header.from'='%header_from'.*)$"
+reading from postproc { s/^.*('header.from'=')([\+,\-]?\d+\.?\d*)(').*$/$2/;; $_ }
+
+reading id match "^(MSG TMP .*'data.device_index'='%device_index'.*'header.from'='%header_from'.*)$"
+reading id postproc { s/^.*('header.id'=')([\+,\-]?\d+\.?\d*)(').*$/$2/;; $_ }
+
+reading last_MSG match "^(MSG .*'data.device_index'='%device_index'.*'header.from'='%header_from'.*)$"
+
+reading last_LOG match "^(LOG .*'data.device_index'='%device_index'.*'header.from'='%header_from'.*)$"
+
+
+# MSG TMP 'data.device_index'='1', 'temp'='22.6', 'header.from'='3', 'header.to'='0', 'header.id'='1', 'header.type'='4', 'bytes_read'=3
+

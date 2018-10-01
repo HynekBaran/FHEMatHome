@@ -1,0 +1,27 @@
+reading foo match "\d+\n"
+reading foo postproc { s/^(\d+).*$/$1/;; $_ }
+
+
+#reading A match ".*\n"
+#reading A postproc { s/^(.*)$/$1/;; use JSON;; my $a = decode_json($_);; return "$a->{'A'}"}
+#
+#reading B match ".*\n"
+#reading B postproc { s/^(.*)$/$1/;; use JSON;; my $a = decode_json($_);; return "$a->{'B'}"}
+
+
+#reading A match ".*\n"
+#reading A postproc { s/^(.*)$/$1/;; use JSON;; my $a = eval { decode_json($_)} or die "error A" ;; return "$a->{'A'}"}
+#
+#reading B match ".*\n"
+#reading B postproc { s/^(.*)$/$1/;; use JSON;; my $a = eval { decode_json($_)} or die "error B" ;; return "$a->{'B'}"}
+
+
+reading A match ".*\n"
+reading A postproc { s/^(.*)$/$1/;; use JSON;; my $a = eval { decode_json($_) } or do {my $e = $@;; Log 1, "decode_json: $e";; return ""};; return "$a->{'A'}"}
+
+reading B match ".*\n"
+reading B postproc { s/^(.*)$/$1/;; use JSON;; my $a = eval { decode_json($_) } or do {my $e = $@;; Log 1, "decode_json: $e";; return ""};; return "$a->{'B'}"}
+
+
+# state = last match
+reading last_msg match ".*\n"

@@ -1,0 +1,3 @@
+params X
+reading foo match "%X=\d+\n"
+reading foo postproc { s/^(\d+).*$/$1/;; $_ }

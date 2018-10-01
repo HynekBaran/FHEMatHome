@@ -1,0 +1,36 @@
+#
+# pjsip-apps/bin/pjsua-armv7l-unknown-linux-gnueabihf --id sip:411529@sip.odorik.cz:6688 --registrar sip:sip.odorik.cz:6688  --realm '*' --username 411529 --password TRw2YJkj --use-cli --cli-telnet-port=9999
+# /usr/bin/screen -dmS pjsua /usr/local/bin/pjsua --config /etc/pjsua.conf
+
+
+### readings
+
+# From: "3.Hynek Mobil" <sip:*411529@sip.odorik.cz>;tag=as50fc1e06
+
+
+reading FromNumber 	match "^From:(.*)$"
+reading FromNumber 	postproc {s/^From:.*sip:\*?(\d+)@.*.*/$1/;; $_ }
+
+reading FromURI 	match "^From:(.*)$"
+reading FromURI 	postproc {s/^From:.*sip:\*?(\d+@.*)>.*/$1/;; $_ }
+
+
+reading ToNumber 	match "^To:(.*)$"
+reading ToNumber 	postproc {s/^To:.*sip:\*?(\d+)@.*.*/$1/;; $_ }
+
+reading ToURI 		match "^To:(.*)$"
+reading ToURI 		postproc {s/^To:.*sip:\*?(\d+@.*)>.*/$1/;; $_ }
+
+
+reading CSeq	match "^CSeq:(.*)$"
+reading CSeq 	postproc {s/^CSeq: (.*)$/$1/;; $_ }
+
+### set commands
+
+# general command
+set command cmd {text}
+set command params "%text\r\n"
+
+# hangup
+set hangup cmd {"g\r\n"}
+
