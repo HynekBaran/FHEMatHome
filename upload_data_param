@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -s "http://emoncms.org/input/post.json?node=$1&json={$2:$3}&apikey=a8d488f87b024bdb7fe8399b9deb5cab" > /dev/null
+#echo "$1" > koko.log

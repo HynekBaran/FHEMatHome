@@ -1,0 +1,4 @@
+#!/bin/bash
+#wget -vnc "http://emoncms.org/input/post.json?json={data:$1}&apikey=a8d488f87b024bdb7fe8399b9deb5cab" > /dev/null
+curl -s "http://emoncms.org/input/post.json?json={data:$1}&apikey=a8d488f87b024bdb7fe8399b9deb5cab" > /dev/null
+#echo "$1" > koko.log
